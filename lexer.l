@@ -18,14 +18,10 @@ NUM {DIGIT}+("."{DIGIT}+)?
 "number"      {  return NU;}
 "real"      {  return X;}
 "symbol"      {  return Y;}
-
 \$[a-zA-Z]+ { return ID; }
-
 (([1-9][0-9]*\.[0-9]+)|(\.[0-9]+)) { return R; }
-
 \"([^"]|\\.)*\"|'([^']|\\.)*' { return S; }
-
 [[:blank:]] ;
-. yyerror("Unknown character");
+
 
 %%

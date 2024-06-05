@@ -1,2 +1,6 @@
-big $Grande = 2;
+large $hola;
+big $prueba2;
 real $numReal;
+number $prueba3;
+symbol $prueba4;
+

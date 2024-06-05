@@ -4,30 +4,53 @@ int yylex(void);
 void yyerror(char *s);
 
 %}
-%token B, ID, G, Y, X, R, S, NU
+%token B ID G Y X R S NU
 %token NUMBER
 %left '+' '-'
 %left '*'
-
+%start inicio
 %%
-list :
-    | list '\n'
-    | list exp {printf("%d\n",$2);}
+inicio :
+    declaraciones
     ;
 
-exp : exp '+' term {$$ = $1 + $3;}
-    | exp '-' term {$$ = $1 - $3;}
-    | term {$$ = $1;}
+declaraciones:
+    declaraciones declaracion
+    | declaracion
     ;
 
-term : term '*' factor {$$ = $1 * $3;}
-    | factor {$$ = $1;}
+tipo :
+    B {printf("Las variables son de tipo big\n");}
+    | G {printf("Las variables son de tipo large\n");}
+    | NU {printf("Las variables son de tipo number\n");}
+    | Y {printf("Las variables son de tipo symbol\n");}
+    | X {printf("Las variables son de tipo real\n");}
     ;
 
-factor : NUMBER {$$ = $1;}
-    | '(' exp ')' {$$ = $2;}
+declaracion :
+    tipo lista_ids ';'
     ;
 
+lista_ids :
+    ID contenido
+    | lista_ids ',' ID contenido
+    ;
+
+contenido : 
+    /* vacío */
+    | '=' valor continuacion
+    ;
+
+valor: 
+    NUMBER
+    | R 
+    | S
+    ;
+
+continuacion: 
+    /* vacío */
+    | ',' ID contenido
+    ;
 %%
 
 void yyerror(char *s)
@@ -35,9 +58,16 @@ void yyerror(char *s)
     printf("\n%s\n",s);
 }
 
-extern FILE * yyin;
+extern FILE *yyin;
+
 int main(int argc, char **argv){
-    if(argc > 1) yyin = fopen(argv[1],"r");
+    if (argc > 1) {
+        yyin = fopen(argv[1], "r");
+        if (!yyin) {
+            perror(argv[1]);
+            return 1;
+        }
+    }
     yyparse();
     return 0;
 }
