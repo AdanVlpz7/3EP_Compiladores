@@ -1,0 +1,5 @@
+Para compilar proyecto se ejecuta:
+bison -d parser1.y
+flex lexer.l
+gcc -o parser.exe parser1.tab.c lex.yy.c 
+.\parser.exe input.txt

@@ -1,3 +1,9 @@
+/*autores:
+Resendiz Casas Axel A.
+Vargas Lopez Miguel Adan
+Vargas Zaldivar Aidee Jacqueline
+*/
+
 %{
     #include <stdio.h>
     #include "parser1.tab.h"
