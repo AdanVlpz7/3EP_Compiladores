@@ -1,6 +1,5 @@
+real $numreal=2,$num;
+number $prueba3;
 large $hola;
 big $prueba2;
-real $numReal;
-number $prueba3;
-symbol $prueba4;
-
+symbol $prueba4="cadena#1",$cadVacia;

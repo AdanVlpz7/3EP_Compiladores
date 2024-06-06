@@ -6,8 +6,7 @@ void yyerror(char *s);
 %}
 %token B ID G Y X R S NU
 %token NUMBER
-%left '+' '-'
-%left '*'
+%left '=' ','
 %start inicio
 %%
 inicio :
@@ -15,7 +14,8 @@ inicio :
     ;
 
 declaraciones:
-    declaraciones declaracion
+    declaraciones '\n' declaracion
+    | declaraciones declaracion
     | declaracion
     ;
 
@@ -55,7 +55,7 @@ continuacion:
 
 void yyerror(char *s)
 {
-    printf("\n%s\n",s);
+    printf("\n%s\n", s);
 }
 
 extern FILE *yyin;
